@@ -77,13 +77,12 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     # вызов Responses API
     try:
-        resp = client.responses.create(
-            model="gpt-4o-mini",
-            instructions=SYSTEM_PROMPT,
-            input=history + [{"role": "user", "content": user_text}],
-        )
+        resp = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=hist(uid) + [{"role": "user", "content": text}],
+)
 
-        answer = resp.output_text.strip() if resp.output_text else "Не понял 😅"
+ answer = (resp.choices[0].message.content or "").strip() or "Не понял 😅"
     except Exception as e:
         await update.message.reply_text(f"Ошибка OpenAI: {e}")
         return
@@ -156,3 +155,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
