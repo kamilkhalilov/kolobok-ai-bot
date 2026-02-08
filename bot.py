@@ -82,7 +82,7 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             messages=hist(uid) + [{"role": "user", "content": text}],
     )
 
-         answer = (resp.choices[0].message.content or "").strip() or "Не понял 😅"
+        answer = (resp.choices[0].message.content or "").strip() or "Не понял 😅"
     except Exception as e:
         await update.message.reply_text(f"Ошибка OpenAI: {e}")
         return
@@ -155,6 +155,7 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
 
 
