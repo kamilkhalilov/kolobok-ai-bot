@@ -79,7 +79,7 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         resp = client.chat.completions.create(
             model="gpt-4o-mini",
-            messages=hist(uid) + [{"role": "user", "content": text}],
+            messages = history + [{"role": "user", "content": text}]
     )
 
         answer = (resp.choices[0].message.content or "").strip() or "Не понял 😅"
@@ -155,6 +155,7 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
 
 
